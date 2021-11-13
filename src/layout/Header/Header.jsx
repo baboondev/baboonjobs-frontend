@@ -15,8 +15,8 @@ function Header() {
               <Menu.Item key={1}>
                 <Logo />
               </Menu.Item>
-              <Menu.Item key={2}>Explorar trabajos</Menu.Item>
-              <Menu.Item key={3}>Publicar trabajo</Menu.Item>
+              <Menu.Item key={2}><Link to="/explore">Explorar trabajos</Link></Menu.Item>
+              <Menu.Item key={3}><Link to="/publish">Publicar trabajo</Link></Menu.Item>
             </Menu>
           </Col>
           <Col>

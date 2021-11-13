@@ -13,3 +13,11 @@
   font-size: 18px;
 
 }
+
+.container {
+  background: white;
+  min-height: 300px;
+  margin: 24px auto;
+  padding: 24px;
+  max-width: 1200px;
+}
