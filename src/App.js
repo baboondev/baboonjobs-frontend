@@ -6,6 +6,7 @@ import Header from "./layout/Header/Header";
 // pages
 import NotAuthorized from "./pages/NotAuthorized/NotAuthorized";
 import NotFound from "./pages/NotFound/NotFound";
+import SignIn from "./pages/SignIn/SignIn";
 
 export default function App() {
   const { Footer, Content } = Layout;
@@ -16,6 +17,7 @@ export default function App() {
         <Content>
           <Routes>
             <Route index element={<Home />} />
+            <Route path="signin" element={<SignIn />} />
             <Route path="notauthorized" element={<NotAuthorized />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
