@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
+import { Typography } from 'antd';
+import { Link } from "react-router-dom";
 
 function SignIn() {
   const onFinish = (values) => {
@@ -20,6 +22,8 @@ function SignIn() {
           maxWidth: "400px",
         }}
       >
+        <Typography.Title level={2}>Iniciar sesión</Typography.Title>
+        <Typography.Text type="secondary">¿No tienes cuenta en BaboonJobs? <Link to="/signup">Regístrate</Link></Typography.Text>
         <Form
           name="basic"
           initialValues={{ remember: true }}
