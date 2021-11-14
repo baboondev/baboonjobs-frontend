@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Publish from "./pages/Publish/Publish";
+import Job from "./pages/Job/Job";
 
 export default function App() {
   const { Footer, Content } = Layout;
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="signup" element={<SignUp />} />
             <Route path="notauthorized" element={<NotAuthorized />} />
             <Route path="publish" element={<Publish />} />
+            <Route path="job/:id" element={<Job />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Content>
