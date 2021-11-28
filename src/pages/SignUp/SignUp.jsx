@@ -1,97 +1,85 @@
-import React from "react";
-import { Form, Input, Button, Radio } from "antd";
-import { Typography } from 'antd';
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Form, Input, Button, Col, Row, Alert } from "antd";
+import { MailOutlined } from "@ant-design/icons";
 
-function SignUp() {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+import { signUpThunk } from "../../redux/actions/users.actions";
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+const SignUp = () => {
+  const dispatch = useDispatch();
+
+  const handleEmailRegister = (user) => {
+    dispatch(signUpThunk(user));
   };
 
   return (
-    <>
-      <div
-        style={{
-          background: "white",
-          margin: "50px auto",
-          padding: "24px",
-          maxWidth: "450px",
-        }}
-      >
-        <Typography.Title level={2}>Crear cuenta</Typography.Title>
-        <div>
-        <Typography.Text type="secondary">¿Ya tienes cuenta? <Link to="/signin">Inicia sesión</Link></Typography.Text>
-        </div>
+    <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
+      <Col xs={24} md={6}>
         <Form
           name="basic"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleEmailRegister}
           autoComplete="off"
-          layout="vertical"
-          requiredMark={false}
-          style={{marginTop: "16px"}}
+          style={{
+            border: "1px solid #eee",
+            padding: "20px",
+            textAlign: "center",
+          }}
         >
+          <h3 style={{ marginBottom: "40px" }}>Crear Cuenta</h3>
+
           <Form.Item
-        name="radio-button"
-        label="Quiero:"
-        rules={[{ required: true, message: 'Debes seleccionar un tipo de cuenta'}]}
-      >
-        <Radio.Group size="large" buttonStyle="solid">
-          <Radio.Button value="employer">Solicitar un trabajo</Radio.Button>
-          <Radio.Button value="worker">Trabajar como freelancer</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
-          <Form.Item
-            label="Nombre"
             name="firstname"
-            rules={[{ required: true, message: "Ingrese su nombre" }]}
+            rules={[
+              { required: true, message: "Please input your firstanem!" },
+            ]}
           >
-            <Input />
+            <Input type="text" placeholder="Nombre" />
           </Form.Item>
+
           <Form.Item
-            label="Apellido"
-            name="surname"
-            rules={[{ required: true, message: "Ingrese su apellido" }]}
+            name="lastname"
+            rules={[{ required: true, message: "Please input your lastname!" }]}
           >
-            <Input />
+            <Input type="text" placeholder="Apellido" />
           </Form.Item>
+
           <Form.Item
-            label="Email"
             name="email"
-            rules={[{ required: true, message: "Ingrese su email." }]}
+            rules={[{ required: true, message: "Please input your email!" }]}
           >
-            <Input />
+            <Input type="email" placeholder="Email" />
           </Form.Item>
 
           <Form.Item
-            label="Contraseña"
             name="password"
-            rules={[{ required: true, message: "Ingrese su contraseña" }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password />
-          </Form.Item>
-          <Form.Item
-            label="Confirmar contraseña"
-            name="confirmpassword"
-            rules={[{ required: true, message: "Debes confirmar la contraseña" }]}
-          >
-            <Input.Password />
+            <Input.Password placeholder="Contraseña" />
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item style={{ marginTop: "20px" }}>
             <Button type="primary" htmlType="submit">
               Crear cuenta
             </Button>
           </Form.Item>
+
+          <Form.Item>
+            <Link to="/login">
+              <Button type="link">Are you already registered?</Button>
+            </Link>
+          </Form.Item>
         </Form>
-      </div>
-    </>
+        {/* {errorMsg !== "" && (
+          <Alert
+            style={{ textAlign: "center" }}
+            message={errorMsg}
+            type="error"
+          />
+        )} */}
+      </Col>
+    </Row>
   );
-}
+};
 
 export default SignUp;

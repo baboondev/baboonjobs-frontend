@@ -1,67 +1,69 @@
-import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { Typography } from 'antd';
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Form, Input, Button, Col, Row, Alert } from "antd";
+import { MailOutlined } from "@ant-design/icons";
 
-function SignIn() {
-  const onFinish = (values) => {
-    console.log("Success:", values);
-  };
+import { signInThunk } from "../../redux/actions/users.actions";
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+const SignIn = () => {
+  const dispatch = useDispatch();
+
+  const handleEmailLogin = ({ email, password }) => {
+    dispatch(signInThunk(email, password));
   };
 
   return (
-    <>
-      <div
-        style={{
-          background: "white",
-          margin: "50px auto",
-          padding: "24px",
-          maxWidth: "400px",
-        }}
-      >
-        <Typography.Title level={2}>Iniciar sesión</Typography.Title>
-        <Typography.Text type="secondary">¿No tienes cuenta en BaboonJobs? <Link to="/signup">Regístrate</Link></Typography.Text>
+    <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
+      <Col xs={24} md={6}>
         <Form
           name="basic"
           initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          onFinish={handleEmailLogin}
           autoComplete="off"
-          layout="vertical"
-          size="large"
+          style={{
+            border: "1px solid #eee",
+            padding: "20px",
+            textAlign: "center",
+          }}
         >
+          <h3 style={{ marginBottom: '40px' }}>Iniciar Sesion</h3>
+
           <Form.Item
-            label="Email"
             name="email"
-            rules={[{ required: true, message: "Ingrese su email." }]}
+            rules={[{ required: true, message: "Please input your email!" }]}
           >
-            <Input />
+            <Input type="email" placeholder="Email" />
           </Form.Item>
 
           <Form.Item
-            label="Contraseña"
             name="password"
-            rules={[{ required: true, message: "Ingrese su contraseña" }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password />
+            <Input.Password placeholder="Password" />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Recuérdame</Checkbox>
+          <Form.Item style={{ marginTop: "20px" }}>
+            <Button type="primary" htmlType="submit">
+              Iniciar sesion
+            </Button>
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Iniciar sesión
-            </Button>
+            <Link to="/signup">
+              <Button type="link">You are not registered?</Button>
+            </Link>
           </Form.Item>
         </Form>
-      </div>
-    </>
+        {/* {errorMsg !== "" && (
+          <Alert
+            style={{ textAlign: "center" }}
+            message={errorMsg}
+            type="error"
+          />
+        )} */}
+      </Col>
+    </Row>
   );
-}
+};
 
 export default SignIn;

@@ -1,10 +1,17 @@
 import React from "react";
-import { Layout, Menu, Row, Col } from "antd/";
-import { GuestMenu } from "./GuestMenu";
-import logo from "../../baboon-svgrepo-com.svg";
+import { Layout, Menu, Row, Col, Button } from "antd/";
+import logo from "../../assets/baboon-svgrepo-com.svg";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/users.actions";
 
 function Header() {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   const { Header } = Layout;
   return (
     <>
@@ -15,12 +22,16 @@ function Header() {
               <Menu.Item key={1}>
                 <Logo />
               </Menu.Item>
-              <Menu.Item key={2}><Link to="/explore">Explorar trabajos</Link></Menu.Item>
-              <Menu.Item key={3}><Link to="/publish">Publicar trabajo</Link></Menu.Item>
+              <Menu.Item key={2}>
+                <Link to="/explore">Explorar trabajos</Link>
+              </Menu.Item>
+              <Menu.Item key={3}>
+                <Link to="/publish">Publicar trabajo</Link>
+              </Menu.Item>
             </Menu>
           </Col>
           <Col>
-            <GuestMenu />
+            <Button type="default" danger onClick={handleLogout}>Cerrar sesion</Button>
           </Col>
         </Row>
       </Header>

@@ -8,7 +8,7 @@ export function GuestMenu() {
         <Button type="link">Iniciar sesión</Button>
       </Link>
       <Link to="/signup">
-        <Button type="primary">Crear cuenta</Button>
+        <Button type="primary">Registrarse</Button>
       </Link>
     </>
   );
