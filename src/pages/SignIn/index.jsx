@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Form, Input, Button, Col, Row, Alert } from "antd";
-import { MailOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Col, Row, Spin, Alert } from "antd";
 
 import { signInThunk } from "../../redux/actions/users.actions";
+import { useState } from "react";
 
 const SignIn = () => {
   const dispatch = useDispatch();
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
   const handleEmailLogin = ({ email, password }) => {
-    dispatch(signInThunk(email, password));
+    dispatch(signInThunk(email, password, setLoading, setError));
   };
 
   return (
@@ -53,14 +56,15 @@ const SignIn = () => {
               <Button type="link">You are not registered?</Button>
             </Link>
           </Form.Item>
+        { loading && <Spin spinning={loading}  /> }
         </Form>
-        {/* {errorMsg !== "" && (
+        {error !== "" && (
           <Alert
             style={{ textAlign: "center" }}
-            message={errorMsg}
+            message={error}
             type="error"
           />
-        )} */}
+        )}
       </Col>
     </Row>
   );

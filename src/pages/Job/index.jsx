@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 import Offer from "../../components/Offer/Offer";
-import UserInfo from "../../components/UserInfo/UserInfo";
+import UserInfo from "../../components/Profile/UserInfo";
 import { Offers } from "../../mocks/jobs";
 
 function Job(props) {

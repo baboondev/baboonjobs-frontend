@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const usersMicroServiceUrl = "http://localhost:8080/auth";
+const usersMicroServiceUrl = "https://baboonjobs-ms-users.herokuapp.com/auth";
 
 export const UserService = {
   signIn: async (email, password) => {

@@ -1,18 +1,31 @@
 import { UserService } from "../../services/users.service";
 import { types } from "../types";
 
-export const signInThunk = (email, password) => {
+export const signInThunk = (email, password, setLoading, setError) => {
   return async (dispatch) => {
-    const credentials = await UserService.signIn(email, password);
-    console.log(credentials);
-    dispatch(signIn(credentials));
+    setLoading(true);
+    try {
+      const credentials = await UserService.signIn(email, password);
+      dispatch(signIn(credentials));
+      setLoading(false);
+    } catch (err) {
+      setError("Email o contraseña incorrecta");
+      setLoading(false);
+    }
   };
 };
 
-export const signUpThunk = (user) => {
+export const signUpThunk = (user, role, setLoading, setError) => {
   return async (dispatch) => {
-    const credentials = await UserService.signUp(user);
-    dispatch(signUp(credentials));
+    setLoading(true);
+    try {
+      const credentials = await UserService.signUp(user, role);
+      dispatch(signUp(credentials));
+      setLoading(false);
+    } catch (err) {
+      setError("El usuario ya existe");
+      setLoading(false);
+    }
   };
 };
 

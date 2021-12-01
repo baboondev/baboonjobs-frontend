@@ -5,8 +5,9 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import SignIn from "../pages/SignIn/SignIn";
-import SignUp from "../pages/SignUp/SignUp";
+
+import SignIn from "../../pages/SignIn";
+import SignUp from "../../pages/SignUp";
 
 const PublicRoutes = () => (
   <Router>

@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 import React from "react";
-import FormJob from "../../components/FormJob/FormJob";
+import FormJob from "../../components/JobForm";
 
 function Publish() {
   const onFinish = (values) => {

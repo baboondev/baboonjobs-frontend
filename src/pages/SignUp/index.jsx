@@ -1,15 +1,29 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Form, Input, Button, Col, Row, Alert } from "antd";
-import { MailOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Col, Row, Radio, Spin, Alert } from "antd";
 
 import { signUpThunk } from "../../redux/actions/users.actions";
+import { useState } from "react";
 
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const handleEmailRegister = (user) => {
-    dispatch(signUpThunk(user));
+  const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleEmailRegister = (data) => {
+    const user = {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      email: data.email,
+      password: data.password
+    };
+    dispatch(signUpThunk(user, role, setLoading, setError));
+  };
+  
+  const handleSetRole = (e) => {
+    setRole(e.target.value);
   };
 
   return (
@@ -58,6 +72,25 @@ const SignUp = () => {
             <Input.Password placeholder="Contraseña" />
           </Form.Item>
 
+          <Form.Item
+            name="radio-button"
+            rules={[
+              {
+                required: true,
+                message: "Debes seleccionar un tipo de cuenta",
+              },
+            ]}
+          >
+            <Radio.Group size="large" buttonStyle="solid">
+              <Radio.Button value="employeer" onClick={handleSetRole}>
+                Solicitar un trabajo
+              </Radio.Button>
+              <Radio.Button value="employee" onClick={handleSetRole}>
+                Trabajar como freelancer
+              </Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+
           <Form.Item style={{ marginTop: "20px" }}>
             <Button type="primary" htmlType="submit">
               Crear cuenta
@@ -69,14 +102,15 @@ const SignUp = () => {
               <Button type="link">Are you already registered?</Button>
             </Link>
           </Form.Item>
+        { loading && <Spin spinning={loading}  /> }
         </Form>
-        {/* {errorMsg !== "" && (
+        {error !== "" && (
           <Alert
             style={{ textAlign: "center" }}
-            message={errorMsg}
+            message={error}
             type="error"
           />
-        )} */}
+        )}
       </Col>
     </Row>
   );
