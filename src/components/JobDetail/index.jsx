@@ -2,35 +2,23 @@ import {
   PageHeader,
   Tag,
   Descriptions,
-  Breadcrumb,
   Button,
   Typography,
 } from "antd";
+import moment from "moment";
 import React from "react";
-import { Link } from "react-router-dom";
 import Offer from "../../components/Offer/Offer";
 import UserInfo from "../../components/Profile/UserInfo";
 import { Offers } from "../../mocks/jobs";
 
-function JobDetail(props) {
+function JobDetail({ job }) {
   const isCurrentUserPublisher = false;
   return (
     <>
       <div className="container">
         <PageHeader
-          title="Electricista para Zona NNNNN"
           subTitle="Publicado el 13/2/2021"
           tags={<Tag color="blue">En búsqueda</Tag>}
-          breadcrumb={
-            <Breadcrumb>
-              <Breadcrumb.Item>
-                <Link to="/jobs">Trabajos</Link>
-              </Breadcrumb.Item>
-              <Breadcrumb.Item>
-                <Link to="/jobs?type=electricistaID">Electricista</Link>
-              </Breadcrumb.Item>
-            </Breadcrumb>
-          }
           extra={
             <>
               {isCurrentUserPublisher && <Button>Editar</Button>}
@@ -43,21 +31,16 @@ function JobDetail(props) {
               <UserInfo
                 firstName="Marcos"
                 lastName="Sosa"
-                rate={3}
-                userType={"Solicitante"}
               />
             </Descriptions.Item>
             <Descriptions.Item label="Descripción">
-              Ant Design&#x27;s design team preferred to design with the HSB
-              color model, which makes it easier for designers to have a clear
-              psychological expectation of color when adjusting colors, as well
-              as facilitate communication in teams.
+              {job.description}
             </Descriptions.Item>
             <Descriptions.Item label="Ubicación">
-              Paseo de la Castellana
+              {job.location}
             </Descriptions.Item>
             <Descriptions.Item label="Fecha a realizar">
-              9/12/2018
+              {moment(job.dateToWork).format("DD/MM/YYYY")}
             </Descriptions.Item>
           </Descriptions>
         </PageHeader>

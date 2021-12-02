@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import { usersReducer } from "./reducers/users.reducer";
+import { jobsReducer } from "./reducers/jobs.reducer";
 
 const composeEnhancers =
   (typeof window !== "undefined" &&
@@ -12,6 +13,7 @@ const composeEnhancers =
 
 const rootReducer = combineReducers({
   users: usersReducer,
+  jobs: jobsReducer,
 });
 
 const persistConfig = {

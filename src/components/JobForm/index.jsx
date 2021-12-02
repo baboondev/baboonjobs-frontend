@@ -1,43 +1,54 @@
 import React from "react";
 import { Form, Input, Select, DatePicker, Button } from "antd";
+import { saveJobThunk } from "../../redux/actions/jobs.actions";
+import { useDispatch, useSelector } from "react-redux";
 
-function JobForm(props) {
-  const { formData, onFinish, onFinishFailed } = props;
+function JobForm() {
+  const { token, id } = useSelector(state => state.users);
+  const dispatch = useDispatch();
+
+  const onFinish = (values) => {
+    dispatch(saveJobThunk({...values, dateToWork: values.dateToWork._d, authorId: id}, token));
+  };
+
   return (
     <Form
       labelCol={{ span: 6 }}
       layout="horizontal"
       onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
       style={{ marginTop: "24px" }}
     >
       <Form.Item
-        name="type"
+        name="groupJob"
         label="Tipo de trabajo"
         rules={[{ required: true, message: "Campo requerido" }]}
       >
         <Select>
-          <Select.Option value="demo">Tipo de trabajo 1</Select.Option>
-          <Select.Option value="demo2">Tipo de trabajo 2</Select.Option>
-          <Select.Option value="demo3">Tipo de trabajo 3</Select.Option>
+          <Select.Option value="Mecanica">Mecanica</Select.Option>
+          <Select.Option value="Limpieza">Limpieza</Select.Option>
+          <Select.Option value="Plomeria">Plomeria</Select.Option>
+          <Select.Option value="Albanileria">Albanileria</Select.Option>
+          <Select.Option value="Pintura">Pintura</Select.Option>
+          <Select.Option value="Educacion">Educacion</Select.Option>
+          <Select.Option value="Otros">Otros</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item
-        name="dateWork"
+        name="dateToWork"
         label="Fecha a realizar"
         rules={[{ required: true, message: "Campo requerido" }]}
       >
         <DatePicker placeholder="Seleccionar fecha" />
       </Form.Item>
       <Form.Item
-        name="ubication"
+        name="location"
         label="Ubicación"
         rules={[{ required: true, message: "Campo requerido" }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        name="detail"
+        name="description"
         label="Descripción detallada"
         rules={[{ required: true, message: "Campo requerido" }]}
       >
@@ -48,7 +59,7 @@ function JobForm(props) {
         rules={[{ required: true, message: "Campo requerido" }]}
       >
         <Button type="primary" htmlType="submit">
-          {formData ? "Editar" : "Publicar"}
+          Publicar
         </Button>
       </Form.Item>
     </Form>
