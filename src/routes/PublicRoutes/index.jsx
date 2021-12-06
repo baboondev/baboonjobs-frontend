@@ -3,11 +3,10 @@ import {
   Route,
   Switch,
   Redirect,
-} from "react-router-dom";
+} from 'react-router-dom'
 
-
-import SignIn from "../../pages/SignIn";
-import SignUp from "../../pages/SignUp";
+import SignIn from '../../components/SignIn'
+import SignUp from '../../components/SignUp'
 
 const PublicRoutes = () => (
   <Router>
@@ -17,6 +16,6 @@ const PublicRoutes = () => (
       <Redirect to="/signin" />
     </Switch>
   </Router>
-);
+)
 
-export default PublicRoutes;
+export default PublicRoutes

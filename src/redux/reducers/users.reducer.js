@@ -1,14 +1,14 @@
-import { types } from "../types";
+import { types } from '../types'
 
 const initialState = {
-  id: "",
-  firstname: "",
-  lastname: "",
-  email: "",
-  token: "",
-  role: "",
+  id: '',
+  firstname: '',
+  lastname: '',
+  email: '',
+  token: '',
+  role: '',
   logged: false,
-};
+}
 
 export const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -22,7 +22,7 @@ export const usersReducer = (state = initialState, action) => {
         token: action.payload.token,
         role: action.payload.role,
         logged: true,
-      };
+      }
     case types.SIGNUP:
       return {
         ...state,
@@ -33,19 +33,19 @@ export const usersReducer = (state = initialState, action) => {
         token: action.payload.token,
         role: action.payload.role,
         logged: true,
-      };
+      }
     case types.LOGOUT:
       return {
         ...state,
-        id: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-        token: "",
-        role: "",
+        id: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        token: '',
+        role: '',
         logged: false,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}
